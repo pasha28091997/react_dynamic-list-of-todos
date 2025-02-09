@@ -22,6 +22,10 @@ export const App: React.FC = () => {
 
     getTodos()
       .then(setTodos)
+      .catch(error => {
+        // eslint-disable-next-line no-console
+        console.error('Ошибка при загрузке задач:', error);
+      })
       .finally(() => setLoader(false));
   }, []);
 
@@ -85,7 +89,9 @@ export const App: React.FC = () => {
         </div>
       </div>
 
-      <TodoModal todo={selectedTodo} onClose={() => setSelectedTodo(null)} />
+      {selectedTodo && (
+        <TodoModal todo={selectedTodo} onClose={() => setSelectedTodo(null)} />
+      )}
     </>
   );
 };

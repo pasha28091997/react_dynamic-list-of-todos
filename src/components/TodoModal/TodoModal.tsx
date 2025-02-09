@@ -57,6 +57,7 @@ export const TodoModal: React.FC<TodoModalProps> = ({ todo, onClose }) => {
               type="button"
               className="delete"
               data-cy="modal-close"
+              aria-label="Clear search"
               onClick={onClose}
             />
           </header>
@@ -72,9 +73,12 @@ export const TodoModal: React.FC<TodoModalProps> = ({ todo, onClose }) => {
               ) : (
                 <strong className="has-text-danger">Planned</strong>
               )}
-
               {' by '}
-              <a href={user?.email}>{user?.name}</a>
+              {user ? (
+                <a href={`mailto:${user.email}`}>{user.name}</a>
+              ) : (
+                <span>No user data</span>
+              )}
             </p>
           </div>
         </div>
